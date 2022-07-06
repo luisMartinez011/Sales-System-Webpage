@@ -5,20 +5,23 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
 import { HomeComponent } from './home.component';
+import { HttpClient } from '@angular/common/http';
+import { ConnectionService } from '../services/connection/connection.service';
 
-describe('HomeComponent', () => {
+fdescribe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ],
+      declarations: [HomeComponent],
       imports: [
         NoopAnimationsModule,
         MatPaginatorModule,
         MatSortModule,
-        MatTableModule,
-      ]
+        MatTableModule
+      ],
+      providers: [ConnectionService]
     }).compileComponents();
   }));
 
@@ -29,6 +32,6 @@ describe('HomeComponent', () => {
   });
 
   it('should compile', () => {
-    expect(component).toBeTruthy();
+    expect(component.getClients()).toBeTruthy();
   });
 });

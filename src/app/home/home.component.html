@@ -24,3 +24,8 @@
       aria-label="Select page">
   </mat-paginator>
 </div>
+
+<button type="button" (click)="getClients()">get</button>
+<div *ngFor="let  x of resultado">
+  <p>{{x.name}}</p>
+</div>
