@@ -9,7 +9,6 @@ import { Client } from 'src/app/models/client';
 })
 export class ConnectionService {
 
-  resultado: Client | undefined;
   public url = "https://localhost:7092";
   constructor(private http: HttpClient) { }
 
