@@ -2,14 +2,14 @@ import { Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-dialog-input',
-  templateUrl: './dialog-input.component.html',
-  styleUrls: ['./dialog-input.component.css']
+  selector: 'app-dialog-new',
+  templateUrl: './dialog-new.component.html',
+  styleUrls: ['./dialog-new.component.css']
 })
-export class DialogInputComponent {
+export class DialogNewComponent {
 
   constructor(
-    public dialogRef: MatDialogRef<DialogInputComponent>,
+    public dialogRef: MatDialogRef<DialogNewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 

@@ -37,8 +37,14 @@ export class ConnectionService {
       );
   }
 
-  updateClient(id: number) {
-
+  updateClient(client: Client): Observable<Client> {
+    const url = `${this.url}/${client.id}`;
+    return this.http.put<Client>(url, client, httpOptions)
+      .pipe(
+        tap(() => {
+          this._refresh$.next();
+        })
+      );
   }
 
   deleteClient(id: number): Observable<unknown> {

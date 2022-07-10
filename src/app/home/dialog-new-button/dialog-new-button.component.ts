@@ -1,15 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConnectionService } from 'src/app/services/connection/connection.service';
-import { DialogInputComponent } from '../dialog-input/dialog-input.component';
+import { DialogNewComponent } from '../dialog-new/dialog-new.component';
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.css']
+  selector: 'app-new-button',
+  templateUrl: './dialog-new-button.component.html',
+  styleUrls: ['./dialog-new-button.component.css']
 })
-export class DialogComponent {
-
+export class DialogNewButton {
 
   name: string | undefined;
   constructor(public dialog: MatDialog,
@@ -17,7 +16,7 @@ export class DialogComponent {
 
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogInputComponent, {
+    const dialogRef = this.dialog.open(DialogNewComponent, {
       width: '250px',
       data: { name: this.name },
     });

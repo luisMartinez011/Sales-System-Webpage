@@ -17,8 +17,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Client>();
   columns: string[] = ["id", "name", "edit", "delete"];
   subscription!: Subscription;
-  newClient = "New Client";
-  editClient = "Edit"
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -38,7 +36,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   getClients(): void {
     this.service.getConnection().subscribe(clients => {
-      console.log(clients)
       this.clients = clients;
       this.dataSource.data = this.clients;
     });

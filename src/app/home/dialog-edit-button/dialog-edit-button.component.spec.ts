@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogInputComponent } from './dialog-input.component';
+import { DialogEditButtonComponent } from './dialog-edit-button.component';
 
-describe('DialogInputComponent', () => {
-  let component: DialogInputComponent;
-  let fixture: ComponentFixture<DialogInputComponent>;
+describe('DialogEditButtonComponent', () => {
+  let component: DialogEditButtonComponent;
+  let fixture: ComponentFixture<DialogEditButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogInputComponent ]
+      declarations: [ DialogEditButtonComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DialogInputComponent);
+    fixture = TestBed.createComponent(DialogEditButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

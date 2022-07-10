@@ -15,7 +15,8 @@
     <ng-container matColumnDef="edit">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Edit</th>
       <td mat-cell *matCellDef="let clients">
-
+        <app-dialog-edit-button
+        [clientID]="clients.id"></app-dialog-edit-button>
       </td>
     </ng-container>
 
@@ -45,4 +46,4 @@
 </div>
 
 
-<app-dialog></app-dialog>
+<app-new-button></app-new-button>

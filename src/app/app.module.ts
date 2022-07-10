@@ -20,21 +20,27 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { ConnectionService } from './services/connection/connection.service';
-import { DialogComponent } from './home/dialog/dialog.component';
-import { DialogInputComponent } from './home/dialog-input/dialog-input.component';
+import { DialogNewButton } from './home/dialog-new-button/dialog-new-button.component';
+import { DialogNewComponent } from './home/dialog-new/dialog-new.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { DialogEditComponent } from './home/dialog-edit/dialog-edit.component';
+import { DialogEditButtonComponent } from './home/dialog-edit-button/dialog-edit-button.component';
+import { SalesComponent } from './sales/sales.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    DialogComponent,
-    DialogInputComponent
+    DialogNewButton,
+    DialogNewComponent,
+    DialogEditComponent,
+    DialogEditButtonComponent,
+    SalesComponent
   ],
   imports: [
     HttpClientModule,
