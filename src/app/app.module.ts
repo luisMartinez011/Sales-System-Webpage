@@ -30,6 +30,8 @@ import { MatInputModule } from '@angular/material/input';
 import { DialogEditComponent } from './home/dialog-edit/dialog-edit.component';
 import { DialogEditButtonComponent } from './home/dialog-edit-button/dialog-edit-button.component';
 import { SalesComponent } from './sales/sales.component';
+import { NewSaleBtnComponent } from './sales/new-sale-btn/new-sale-btn.component';
+import { NewSaleFormComponent } from './sales/new-sale-form/new-sale-form.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { SalesComponent } from './sales/sales.component';
     DialogNewComponent,
     DialogEditComponent,
     DialogEditButtonComponent,
-    SalesComponent
+    SalesComponent,
+    NewSaleBtnComponent,
+    NewSaleFormComponent
   ],
   imports: [
     HttpClientModule,
