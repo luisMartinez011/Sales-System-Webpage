@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Client } from 'src/app/models/client';
-import { ConnectionService } from 'src/app/services/connection/connection.service';
+import { ProductsService } from 'src/app/services/products/products.service';
 import { DialogEditComponent } from '../dialog-edit/dialog-edit.component';
 
 @Component({
@@ -13,20 +12,30 @@ export class DialogEditButtonComponent {
 
   @Input() clientID!: number;
   name: string | undefined;
+  price: string | undefined;
   constructor(public dialog: MatDialog,
-    private service: ConnectionService) { }
+    private service: ProductsService) { }
 
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogEditComponent, {
       width: '250px',
-      data: { name: this.name },
+      data: {
+        name: this.name,
+        price: this.price
+      },
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
-      this.service
-        .updateClient({ name: result, id: this.clientID }).subscribe();
+      if (result) {
+        this.service
+          .updateProducts({
+            nombre: result[0],
+            precio: result[1],
+            id: this.clientID
+          }).subscribe();
+      }
     });
   }
 }
+

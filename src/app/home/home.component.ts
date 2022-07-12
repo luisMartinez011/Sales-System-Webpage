@@ -4,7 +4,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { Client } from '../models/client';
-import { ConnectionService } from '../services/connection/connection.service';
+import { Producto } from '../models/producto';
+import { ProductsService } from '../services/products/products.service';
 
 
 @Component({
@@ -13,19 +14,19 @@ import { ConnectionService } from '../services/connection/connection.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  clients: Client[] = [];
-  dataSource = new MatTableDataSource<Client>();
-  columns: string[] = ["id", "name", "edit", "delete"];
+  products: Producto[] = [];
+  dataSource = new MatTableDataSource<Producto>();
+  columns: string[] = ["id", "name", "price", "edit", "delete"];
   subscription!: Subscription;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private service: ConnectionService) { }
+  constructor(private service: ProductsService) { }
 
   ngOnInit(): void {
-    this.getClients();
+    this.getProducts();
     this.subscription = this.service.refresh$.subscribe(() => {
-      this.getClients();
+      this.getProducts();
     })
   }
 
@@ -34,16 +35,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  getClients(): void {
-    this.service.getConnection().subscribe(clients => {
-      this.clients = clients;
-      this.dataSource.data = this.clients;
+  getProducts(): void {
+    this.service.getProducts().subscribe(products => {
+      this.products = products;
+      this.dataSource.data = this.products;
     });
   }
 
-  deleteClients(client: number) {
+  deleteProducts(id: number) {
     this.service
-      .deleteClient(client)
+      .deleteProducts(id)
       .subscribe();
   }
 }

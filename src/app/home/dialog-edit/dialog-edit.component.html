@@ -1,12 +1,16 @@
 <h1 mat-dialog-title>Hi</h1>
 <div mat-dialog-content>
-  <p>Change client´s name</p>
+  <p>Edit product</p>
   <mat-form-field appearance="fill">
     <mat-label>Rename</mat-label>
     <input matInput [(ngModel)]="data.name">
   </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Price</mat-label>
+    <input matInput [(ngModel)]="data.price">
+  </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial>Ok</button>
+  <button mat-button [mat-dialog-close]=[data.name,data.price] cdkFocusInitial>Ok</button>
 </div>

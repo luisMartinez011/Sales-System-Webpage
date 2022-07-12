@@ -19,10 +19,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { ConnectionService } from './services/connection/connection.service';
 import { DialogNewButton } from './home/dialog-new-button/dialog-new-button.component';
 import { DialogNewComponent } from './home/dialog-new/dialog-new.component';
-import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
@@ -32,6 +30,9 @@ import { DialogEditButtonComponent } from './home/dialog-edit-button/dialog-edit
 import { SalesComponent } from './sales/sales.component';
 import { NewSaleBtnComponent } from './sales/new-sale-btn/new-sale-btn.component';
 import { NewSaleFormComponent } from './sales/new-sale-form/new-sale-form.component';
+import { SalesFormComponent } from './sales-form/sales-form.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { NewSaleFormComponent } from './sales/new-sale-form/new-sale-form.compon
     DialogEditButtonComponent,
     SalesComponent,
     NewSaleBtnComponent,
-    NewSaleFormComponent
+    NewSaleFormComponent,
+    SalesFormComponent
   ],
   imports: [
     HttpClientModule,
@@ -67,7 +69,10 @@ import { NewSaleFormComponent } from './sales/new-sale-form/new-sale-form.compon
     ReactiveFormsModule,
     MatFormFieldModule,
     MatDialogModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule
   ],
   providers: [{ provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }],
   bootstrap: [AppComponent]
