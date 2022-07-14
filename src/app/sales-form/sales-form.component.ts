@@ -1,9 +1,8 @@
-import { Component, Inject, LOCALE_ID } from '@angular/core';
+import { Component, Inject, LOCALE_ID, SimpleChanges } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ConnectionService } from '../services/connection/connection.service';
-import { formatDate } from '@angular/common';
 import { Concepto } from '../models/concepto';
-import { SalesService } from '../services/sales/sales.service';
+import { ProductsService } from '../services/products/products.service';
+import { Producto } from '../models/producto';
 
 @Component({
   selector: 'app-sales-form',
@@ -14,60 +13,54 @@ export class SalesFormComponent {
   addressForm = this.fb.group({
 
     client: [null, Validators.required],
-    product: [null, Validators.required],
+    producto: [null, Validators.required],
     amount: [null, Validators.required],
     price: [null, Validators.compose([
       Validators.required, Validators.minLength(3), Validators.maxLength(5)
     ])],
-    // postalCode: [null, Validators.compose([
-    //   Validators.required, Validators.minLength(5), Validators.maxLength(5)])
-    // ]
   });
 
-  conceptos: Concepto[] = [{
-    "cantidad": 4,
-    "importe": 80,
-    "idProducto": 1
-  }];
-
-  major = 1;
+  conceptos: Concepto[] = [];
+  productos: Producto[] = [];
+  price: any;
+  productName: string | undefined;
 
   constructor(private fb: FormBuilder,
-    private service: SalesService,
-    @Inject(LOCALE_ID) private locale: string) { }
+    private service: ProductsService) { }
+
+  ngOnInit(): void {
+    this.getProducts();
+  }
+
+  getProducts(): void {
+    this.service.getProducts().subscribe(products => {
+      this.productos = products;
+    });
+  }
+
+  findProduct() {
+    const productName = this.addressForm.value.producto;
+    const product = this.productos.find((val) => {
+      return productName === val.nombre
+    })
+    return product;
+  }
+
+  findProductPrice() {
+    const product = this.findProduct();
+    this.price = product?.precio;
+  }
 
   onSubmit(): void {
-    this.major++;
-    const formResult = this.addressForm.value
-    console.log(formResult)
-    if (formResult) {
-      this.conceptos.push({
-        "cantidad": 4,
-        "importe": 80,
-        "idProducto": 1
-      });
-    }
-
-    /* this.service.addConcepto([{
-      "cantidad": 4,
-      "importe": 80,
-      "idProducto": 1
-    }]);
-    let now = formatDate(Date.now(), 'yyyy-MM-dd', this.locale); */
-    /* this.service.addClient(
-      {
-        "name": "kkkk",
-        "venta": [{
-          "fecha": "2020-05-05",
-          "total": 700,
-          "conceptos": [{
-            "cantidad": 4,
-            "importe": 80,
-            "idProducto": 1
-          }]
-        }]
-      }
-    ).subscribe(); */
-
+    const formResult = this.addressForm.value;
+    const product = this.findProduct();
+    console.log(product)
+    this.conceptos.push({
+      "cantidad": formResult.amount,
+      "importe": formResult.amount * this.price,
+      "idProducto": product?.id as number
+    });
+    this.productName = product?.nombre;
+    // let now = formatDate(Date.now(), 'yyyy-MM-dd', this.locale);
   }
 }

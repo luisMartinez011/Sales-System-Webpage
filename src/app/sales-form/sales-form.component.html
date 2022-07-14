@@ -6,33 +6,28 @@
     <mat-card-content>
       <div class="col">
         <mat-form-field class="full-width">
-          <input matInput placeholder="Client" formControlName="client">
+          <input matInput placeholder="Client" formControlName="client" >
           <mat-error *ngIf="addressForm.controls['client'].hasError('required')">
             Client is <strong>required</strong>
           </mat-error>
         </mat-form-field>
       </div>
       <div class="row">
-        <!-- <div class="col">
-          <mat-form-field class="full-width">
-            <mat-select placeholder="Product" formControlName="product">
-              <mat-option *ngFor="let state of states" [value]="state.abbreviation">
-                {{ state.name }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="addressForm.controls['state'].hasError('required')">
-              State is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </div> -->
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Product" formControlName="product">
-            <mat-error *ngIf="addressForm.controls['product'].hasError('required')">
+            <mat-select placeholder="Product" formControlName="producto"
+            (selectionChange)="findProductPrice()">
+              <mat-option *ngFor="let producto of productos"
+              [value]="producto.nombre">
+                {{ producto.nombre }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="addressForm.controls['producto'].hasError('required')">
               Product is <strong>required</strong>
             </mat-error>
           </mat-form-field>
         </div>
+
       </div>
 
       <div class="row">
@@ -47,10 +42,8 @@
 
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Price" formControlName="price">
-            <mat-error *ngIf="addressForm.controls['price'].hasError('required')">
-              Price is <strong>required</strong>
-            </mat-error>
+            <input matInput disabled value={{price}}
+            placeholder="Price">
           </mat-form-field>
         </div>
 
@@ -58,13 +51,14 @@
 
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <button mat-raised-button color="primary" type="submit"
+
+      >Submit</button>
     </mat-card-actions>
   </mat-card>
 </form>
 
 <app-deploy-sales
 [conceptos]="conceptos"
-[major]="major">
-
+[productName]="productName">
 </app-deploy-sales>

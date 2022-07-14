@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { Concepto } from 'src/app/models/concepto';
+import { ProductsService } from 'src/app/services/products/products.service';
 import { SalesService } from 'src/app/services/sales/sales.service';
 import { DeploySalesDataSource, DeploySalesItem } from './deploy-sales-datasource';
 
@@ -15,39 +16,37 @@ import { DeploySalesDataSource, DeploySalesItem } from './deploy-sales-datasourc
 
 export class DeploySalesComponent implements OnChanges, AfterViewInit {
   @Input() conceptos!: Concepto[];
-  @Input() major = 0;
+  @Input() productName: string | undefined;
 
-  prueba: Concepto[] = [{
-    "cantidad": 4,
-    "importe": 80,
-    "idProducto": 1
-  }]
+  total = 0;
   dataSource = new MatTableDataSource<Concepto>();
-  columns: string[] = ["amount", "price", "idProduct"];
+  columns: string[] = ["product", "amount", "price", "delete"];
   subscription!: Subscription;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private service: SalesService) { }
-
+  constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.dataSource.data = this.conceptos;
-    console.log(this.conceptos)
-
+    console.log("dfdf")
+    if (!(this.conceptos[0] === undefined)) {
+      this.total += this.conceptos[this.conceptos.length - 1].importe;
+    }
   }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    console.log("init")
   }
 
-  getConceptos(): void {
-
-
-  }
-
-  deleteProducts(id: number) {
+  deleteConcepto(concepto: Concepto) {
+    const firstMatch = this.conceptos.findIndex((res) => {
+      return (res.cantidad === concepto.cantidad
+        && res.idProducto === concepto.idProducto
+        && res.importe === concepto.importe)
+    });
+    this.conceptos.splice(firstMatch, 1);
+    this.dataSource.data = this.conceptos;
   }
 }
