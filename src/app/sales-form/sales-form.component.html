@@ -29,7 +29,7 @@
           <mat-form-field class="full-width">
             <input matInput placeholder="Product" formControlName="product">
             <mat-error *ngIf="addressForm.controls['product'].hasError('required')">
-              Amount is <strong>required</strong>
+              Product is <strong>required</strong>
             </mat-error>
           </mat-form-field>
         </div>
@@ -38,9 +38,18 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
+            <input matInput placeholder="Amount" formControlName="amount">
+            <mat-error *ngIf="addressForm.controls['amount'].hasError('required')">
+              Amount is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
             <input matInput placeholder="Price" formControlName="price">
             <mat-error *ngIf="addressForm.controls['price'].hasError('required')">
-              City is <strong>required</strong>
+              Price is <strong>required</strong>
             </mat-error>
           </mat-form-field>
         </div>
@@ -53,3 +62,9 @@
     </mat-card-actions>
   </mat-card>
 </form>
+
+<app-deploy-sales
+[conceptos]="conceptos"
+[major]="major">
+
+</app-deploy-sales>

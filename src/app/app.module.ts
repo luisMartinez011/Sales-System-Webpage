@@ -27,12 +27,10 @@ import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/d
 import { MatInputModule } from '@angular/material/input';
 import { DialogEditComponent } from './home/dialog-edit/dialog-edit.component';
 import { DialogEditButtonComponent } from './home/dialog-edit-button/dialog-edit-button.component';
-import { SalesComponent } from './sales/sales.component';
-import { NewSaleBtnComponent } from './sales/new-sale-btn/new-sale-btn.component';
-import { NewSaleFormComponent } from './sales/new-sale-form/new-sale-form.component';
 import { SalesFormComponent } from './sales-form/sales-form.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
+import { DeploySalesComponent } from './sales-form/deploy-sales/deploy-sales.component';
 
 @NgModule({
   declarations: [
@@ -43,10 +41,8 @@ import { MatRadioModule } from '@angular/material/radio';
     DialogNewComponent,
     DialogEditComponent,
     DialogEditButtonComponent,
-    SalesComponent,
-    NewSaleBtnComponent,
-    NewSaleFormComponent,
-    SalesFormComponent
+    SalesFormComponent,
+    DeploySalesComponent
   ],
   imports: [
     HttpClientModule,

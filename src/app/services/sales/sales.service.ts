@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Client } from 'src/app/models/client';
 import { catchError, retry, tap } from 'rxjs/operators';
+import { Concepto } from 'src/app/models/concepto';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,23 +19,20 @@ export class SalesService {
 
   public url = "https://localhost:7092/api/clientes";
   private _refresh$ = new Subject<void>();
+  public concepto = new BehaviorSubject<Concepto[]>([]);
+
   constructor(private http: HttpClient) { }
 
   get refresh$() {
     return this._refresh$;
   }
 
-  getConnection(): Observable<Client[]> {
-    return this.http.get<Client[]>(`${this.url}`)
+  getConcepto() {
+    return this.concepto.asObservable();
   }
 
-  addClient(client: Client): Observable<Client> {
-    return this.http.post<Client>(`${this.url}`, client, httpOptions)
-      .pipe(
-        tap(() => {
-          this._refresh$.next();
-        })
-      );
+  addConcepto(data: Concepto[]) {
+    this.concepto.next(data);
   }
 
 }
