@@ -51,10 +51,10 @@ export class SalesFormComponent {
     this.price = product?.precio;
   }
 
+
   onSubmit(): void {
     const formResult = this.addressForm.value;
     const product = this.findProduct();
-    console.log(product)
     this.conceptos.push({
       "cantidad": formResult.amount,
       "importe": formResult.amount * this.price,
