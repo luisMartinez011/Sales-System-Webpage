@@ -52,4 +52,4 @@ jobs:
           app-name: 'dotnetVentas'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_290D43C3A3F6446E9E166DDC90128E5F }}
-          package: .
+          package: ./dist/dotnet-ventas
