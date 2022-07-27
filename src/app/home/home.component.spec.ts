@@ -31,7 +31,5 @@ fdescribe('HomeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should compile', () => {
-    expect(component.getClients()).toBeTruthy();
-  });
+
 });
