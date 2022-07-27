@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, retry, tap } from 'rxjs/operators';
 import { Producto } from 'src/app/models/producto';
+import { environment } from 'src/environments/environment.prod';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    // Authorization: 'my-auth-token'
+    "Ocp-Apim-Subscription-Key": environment.KEY
   })
 };
 
@@ -16,7 +16,7 @@ const httpOptions = {
 })
 export class ProductsService {
 
-  public url = "https://localhost:7092/api/productos";
+  public url = `${environment.URL}/productos`;
   private _refresh$ = new Subject<void>();
   constructor(private http: HttpClient) { }
 
@@ -25,7 +25,7 @@ export class ProductsService {
   }
 
   getProducts(): Observable<Producto[]> {
-    return this.http.get<Producto[]>(`${this.url}`)
+    return this.http.get<Producto[]>("https://dotnetventasapi.azure-api.net/api/Productos", httpOptions)
   }
 
   addProducts(product: Producto): Observable<Producto> {

@@ -1,14 +1,15 @@
+import { formatDate } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, retry, tap } from 'rxjs/operators';
 import { Client } from 'src/app/models/client';
 import { Concepto } from 'src/app/models/concepto';
+import { environment } from 'src/environments/environment.prod';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    // Authorization: 'my-auth-token'
+    "Ocp-Apim-Subscription-Key": environment.KEY
   })
 };
 
@@ -17,7 +18,7 @@ const httpOptions = {
 })
 export class ConnectionService {
 
-  public url = "https://localhost:7092/api/clientes";
+  public url = `${environment.URL}/clientes`;
   private _refresh$ = new Subject<void>();
   constructor(private http: HttpClient) { }
 
@@ -29,9 +30,15 @@ export class ConnectionService {
     return this.http.get<Client[]>(`${this.url}`)
   }
 
-  addClient(conceptos: Concepto[]) {
-    this.http.post(`${this.url}`, {
-      "name": "servicio"
+  addClient(conceptos: Concepto[], clientName: string, total: number) {
+    let now = formatDate(Date.now(), 'yyyy-MM-dd', "en-US");
+    return this.http.post(`${this.url}`, {
+      name: clientName,
+      venta: [{
+        fecha: now,
+        total: total,
+        conceptos: conceptos
+      }]
     }, httpOptions)
   }
 }

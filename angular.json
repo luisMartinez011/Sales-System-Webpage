@@ -19,7 +19,9 @@
           "options": {
             "allowedCommonJsDependencies": [
               "lodash",
-              "rxjs-compat"
+              "rxjs-compat",
+              "raf",
+              "core-js"
            ],
             "outputPath": "dist/dotnet-ventas",
             "index": "src/index.html",
@@ -30,6 +32,7 @@
               "src/favicon.ico",
               "src/assets"
             ],
+
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"

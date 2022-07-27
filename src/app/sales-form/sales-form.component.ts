@@ -23,7 +23,8 @@ export class SalesFormComponent {
   conceptos: Concepto[] = [];
   productos: Producto[] = [];
   price: any;
-  productName: string | undefined;
+  productName!: string;
+  clientName: any;
 
   constructor(private fb: FormBuilder,
     private service: ProductsService) { }
@@ -60,7 +61,7 @@ export class SalesFormComponent {
       "importe": formResult.amount * this.price,
       "idProducto": product?.id as number
     });
-    this.productName = product?.nombre;
-    // let now = formatDate(Date.now(), 'yyyy-MM-dd', this.locale);
+    this.productName = this.addressForm.value.producto
+    this.clientName = formResult.client;
   }
 }

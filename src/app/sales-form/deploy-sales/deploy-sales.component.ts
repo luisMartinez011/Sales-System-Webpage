@@ -6,7 +6,8 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { Concepto } from 'src/app/models/concepto';
 import { ConnectionService } from 'src/app/services/connection/connection.service';
-import { SalesService } from 'src/app/services/sales/sales.service';
+
+
 @Component({
   selector: 'app-deploy-sales',
   templateUrl: './deploy-sales.component.html',
@@ -16,6 +17,7 @@ import { SalesService } from 'src/app/services/sales/sales.service';
 export class DeploySalesComponent implements AfterViewInit {
   @Input() conceptos!: Concepto[];
   @Input() productName!: string;
+  @Input() clientName!: string;
 
   total = 0;
   dataSource = new MatTableDataSource<Concepto>();
@@ -24,8 +26,9 @@ export class DeploySalesComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   iterableDiffer: any;
 
-  constructor(private iterableDiffers: IterableDiffers,
-    private service: ConnectionService) {
+  constructor(iterableDiffers: IterableDiffers,
+    private service: ConnectionService
+  ) {
     this.iterableDiffer = iterableDiffers.find([]).create();
   }
 
@@ -33,7 +36,6 @@ export class DeploySalesComponent implements AfterViewInit {
     let changes = this.iterableDiffer.diff(this.conceptos);
     if (changes) {
       this.dataSource.data = this.conceptos;
-      console.log("cambios")
       if (!(this.conceptos[0] === undefined)) {
         this.total += this.conceptos[this.conceptos.length - 1].importe;
       }
@@ -59,14 +61,16 @@ export class DeploySalesComponent implements AfterViewInit {
     let data = document.getElementById(div_id);
     html2canvas(data as HTMLElement).then(canvas => {
       const contentDataURL = canvas.toDataURL('image/png')
-      let pdf = new jsPDF('l', 'cm', 'a4'); //Generates PDF in landscape mode
-      // let pdf = new jspdf('p', 'cm', 'a4'); Generates PDF in portrait mode
+      let pdf = new jsPDF('l', 'cm', 'a4');
       pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);
       pdf.save('Filename.pdf');
     });
+    this.postDataToDB();
   }
 
   postDataToDB() {
-    this.service.addClient(this.conceptos);
+    this.service
+      .addClient(this.conceptos, this.clientName, this.total)
+      .subscribe()
   }
 }
