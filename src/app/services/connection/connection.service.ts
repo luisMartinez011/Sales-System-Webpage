@@ -7,11 +7,7 @@ import { Client } from 'src/app/models/client';
 import { Concepto } from 'src/app/models/concepto';
 import { environment } from 'src/environments/environment.prod';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    "Ocp-Apim-Subscription-Key": environment.KEY
-  })
-};
+
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +35,6 @@ export class ConnectionService {
         total: total,
         conceptos: conceptos
       }]
-    }, httpOptions)
+    })
   }
 }

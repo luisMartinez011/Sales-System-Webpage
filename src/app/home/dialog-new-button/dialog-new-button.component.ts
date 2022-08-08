@@ -27,11 +27,8 @@ export class DialogNewButton {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.service
-          .addProducts({
-            nombre: result[0],
-            precio: result[1]
-          }).subscribe();
+
+        this.service.addProducts(result).subscribe()
       }
     });
   }

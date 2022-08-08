@@ -5,18 +5,14 @@ import { catchError, retry, tap } from 'rxjs/operators';
 import { Producto } from 'src/app/models/producto';
 import { environment } from 'src/environments/environment.prod';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    "Ocp-Apim-Subscription-Key": environment.KEY
-  })
-};
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
-  public url = `${environment.URL}/productos`;
+  public url = `${environment.URL}/Productos`;
   private _refresh$ = new Subject<void>();
   constructor(private http: HttpClient) { }
 
@@ -24,12 +20,15 @@ export class ProductsService {
     return this._refresh$;
   }
 
+
+
+
   getProducts(): Observable<Producto[]> {
-    return this.http.get<Producto[]>("https://dotnetventasapi.azure-api.net/api/Productos", httpOptions)
+    return this.http.get<Producto[]>(this.url)
   }
 
   addProducts(product: Producto): Observable<Producto> {
-    return this.http.post<Producto>(`${this.url}`, product, httpOptions)
+    return this.http.post<any>(this.url, product)
       .pipe(
         tap(() => {
           this._refresh$.next();
@@ -39,7 +38,7 @@ export class ProductsService {
 
   updateProducts(product: Producto): Observable<Producto> {
     const url = `${this.url}/${product.id}`;
-    return this.http.put<Producto>(url, product, httpOptions)
+    return this.http.put<Producto>(url, product)
       .pipe(
         tap(() => {
           this._refresh$.next();
@@ -49,7 +48,7 @@ export class ProductsService {
 
   deleteProducts(id: number): Observable<unknown> {
     const url = `${this.url}/${id}`; // DELETE api/heroes/42
-    return this.http.delete(url, httpOptions).pipe(
+    return this.http.delete(url).pipe(
       tap(() => {
         this._refresh$.next();
       })
