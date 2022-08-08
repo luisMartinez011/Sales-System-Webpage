@@ -30,8 +30,8 @@ export class DialogEditButtonComponent {
       if (result) {
         this.service
           .updateProducts({
-            nombre: result[0],
-            precio: result[1],
+            Nombre: result[0],
+            Precio: result[1],
             id: this.clientID
           }).subscribe();
       }

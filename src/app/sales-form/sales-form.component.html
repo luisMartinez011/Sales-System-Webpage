@@ -18,8 +18,8 @@
             <mat-select placeholder="Product" formControlName="producto"
             (selectionChange)="findProductPrice()">
               <mat-option *ngFor="let producto of productos"
-              [value]="producto.nombre">
-                {{ producto.nombre }}
+              [value]="producto.Nombre">
+                {{ producto.Nombre }}
               </mat-option>
             </mat-select>
             <mat-error *ngIf="addressForm.controls['producto'].hasError('required')">

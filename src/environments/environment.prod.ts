@@ -1,4 +1,4 @@
 export const environment = {
-  URL: "https://ventas20220807230452.azurewebsites.net/api",
+  URL: "https://dotnet-ventas.herokuapp.com/api",
   production: true
 };

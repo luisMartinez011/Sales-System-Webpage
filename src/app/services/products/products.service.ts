@@ -20,9 +20,6 @@ export class ProductsService {
     return this._refresh$;
   }
 
-
-
-
   getProducts(): Observable<Producto[]> {
     return this.http.get<Producto[]>(this.url)
   }

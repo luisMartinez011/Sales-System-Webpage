@@ -42,14 +42,14 @@ export class SalesFormComponent {
   findProduct() {
     const productName = this.addressForm.value.producto;
     const product = this.productos.find((val) => {
-      return productName === val.nombre
+      return productName === val.Nombre
     })
     return product;
   }
 
   findProductPrice() {
     const product = this.findProduct();
-    this.price = product?.precio;
+    this.price = product?.Precio;
   }
 
 

@@ -1,6 +1,6 @@
 export interface Producto {
   id?: number,
-  nombre: string,
-  precio: number,
+  Nombre: string,
+  Precio: number,
   conceptos?: any
 }
