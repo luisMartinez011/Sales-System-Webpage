@@ -107,9 +107,15 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
   },
-  "defaultProject": "dotnetVentas"
+  "defaultProject": "dotnetVentas",
+  "cli": {
+    "analytics": "4b869f29-fe49-4344-b9e9-c22ec53ecbfd"
+  }
 }
