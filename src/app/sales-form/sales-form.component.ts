@@ -21,7 +21,7 @@ export class SalesFormComponent {
   });
 
   conceptos: Concepto[] = [];
-  productos: Producto[] = [];
+  productos: any[] = [];
   price: any;
   productName!: string;
   clientName: any;
@@ -42,14 +42,14 @@ export class SalesFormComponent {
   findProduct() {
     const productName = this.addressForm.value.producto;
     const product = this.productos.find((val) => {
-      return productName === val.Nombre
+      return productName === val.nombre
     })
     return product;
   }
 
   findProductPrice() {
     const product = this.findProduct();
-    this.price = product?.Precio;
+    this.price = product?.precio;
   }
 
 
